@@ -8,7 +8,6 @@ use work.common.all;
 use work.helpers.all;
 use work.crhelpers.all;
 use work.ppc_fx_insns.all;
-use work.sim_console.all;
 
 entity execute1 is
 	generic (
@@ -282,28 +281,14 @@ begin
 
 				-- sim console
 				when OP_SIM_READ =>
-					if SIM = true then
-						sim_console_read(result);
-						result_en := 1;
-					else
 						terminate_out <= '1';
 						report "illegal";
-					end if;
 				when OP_SIM_POLL =>
-					if SIM = true then
-						sim_console_poll(result);
-						result_en := 1;
-					else
 						terminate_out <= '1';
 						report "illegal";
-					end if;
 				when OP_SIM_WRITE =>
-					if SIM = true then
-						sim_console_write(e.read_data1);
-					else
 						terminate_out <= '1';
 						report "illegal";
-					end if;
 				when OP_SIM_CONFIG =>
 					if SIM = true then
 						result := x"0000000000000001";
